@@ -1,28 +1,44 @@
 package org.example.adventurexp.Model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+
+//import lombok.Getter;
+//import lombok.Setter;
+
+//@Getter
+//@Setter
 
 @Entity
-@Table(name = "customer")
-public class Customer {
+@Table(name = "booking")
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerID;
+    private int bookingId;
 
     private String firstName;
     private String lastName;
-    private LocalDate dateOfBirth;
     private String email;
     private String phone;
 
-    public int getCustomerID() {
-        return customerID;
+    @OneToOne
+    @JoinColumn(name = "activity_name", referencedColumnName = "name")
+    private Activity activity;
+
+    private int numberOfGuests;
+    private LocalDate bookingDate;
+    private LocalTime bookingTime;
+
+
+    public int getBookingId() {
+        return bookingId;
     }
 
-    public void setCustomerID(int customerID) {
-        this.customerID = customerID;
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
     }
 
     public String getFirstName() {
@@ -41,14 +57,6 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -63,5 +71,37 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
+    }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public LocalDate getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(LocalDate bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public LocalTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalTime bookingTime) {
+        this.bookingTime = bookingTime;
     }
 }
