@@ -20,6 +20,38 @@ public class EmployeeRestController {
     @Autowired
     EmployeeRepository employeeRepository;
 
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Employee employee) {
+        List<Employee> listOfEmployees = employeeRepository.findAll();
+
+        for (Employee e : listOfEmployees) {
+            if (e.getUsername().equals(employee.getUsername()) && e.getPassword().equals(employee.getPassword())) {
+
+                if (e.getEmployee_id() == 1){
+                    return ResponseEntity.ok("Welcome activity manager");
+                } else if (e.getEmployee_id() == 2){
+                    return ResponseEntity.ok("Welcome reservation manager");
+                }
+
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/all")
     public List<Employee> employees(){
         return employeeRepository.findAll();
