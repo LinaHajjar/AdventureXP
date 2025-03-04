@@ -11,14 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
+@RequestMapping("bookings")
+@CrossOrigin(origins = "*")
+
 public class BookingRestController {
 
     @Autowired
     BookingRepository bookingRepository;
 
     // show the list of all bookings
-    @GetMapping("/bookings")
+    @GetMapping("/all")
     public List<Booking> bookings() {
         return bookingRepository.findAll();
     }
@@ -32,8 +36,8 @@ public class BookingRestController {
 
     // Update an existing booking
     @PutMapping("/booking/{bookingId}")
-    public ResponseEntity<Booking> putBooking(@PathVariable int bookingId, @RequestBody Booking booking) {
-        Optional<Booking> existingBooking = bookingRepository.findById(bookingId);
+    public ResponseEntity<Booking> putBooking(@PathVariable int bookingId, @RequestBody Booking booking) { //ResponseEntity
+        Optional<Booking> existingBooking = bookingRepository.findById(bookingId); //Optional for at undgå NULL objekter
         if (existingBooking.isPresent()) {
             bookingRepository.save(booking); //Function: Updates an existing booking if it exists in the database.
             return ResponseEntity.ok(booking); //200 : ok

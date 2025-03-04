@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
+@RequestMapping("employees")
+@CrossOrigin(origins = "*")
+
 public class EmployeeRestController {
 
     @Autowired
     EmployeeRepository employeeRepository;
 
-    @GetMapping("/employees")
+    @GetMapping("/all")
     public List<Employee> employees(){
         return employeeRepository.findAll();
     }
@@ -46,7 +50,8 @@ public class EmployeeRestController {
             employeeRepository.deleteById(employee_id);
             return ResponseEntity.ok("Employee deleted successfully");
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found"
+            );
         }
     }
 

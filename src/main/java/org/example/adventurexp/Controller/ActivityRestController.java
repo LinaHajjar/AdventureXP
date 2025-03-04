@@ -11,13 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("activities")
+@CrossOrigin(origins = "*")
 public class ActivityRestController {
 
     @Autowired
     ActivityRepository activityRepository;
 
     // show all the activities
-    @GetMapping("/activities")
+    @GetMapping("/all")
     public List<Activity> getActivities() {
         return activityRepository.findAll();
     }

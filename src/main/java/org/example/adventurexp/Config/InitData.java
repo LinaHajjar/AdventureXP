@@ -70,6 +70,58 @@ public class InitData implements CommandLineRunner {
         employeeRepository.save(employee1);
         employeeRepository.save(employee2);
 
-    }
 
+        Booking booking1 = new Booking();
+        booking1.setFirstName("Alice");
+        booking1.setLastName("Johnson");
+        booking1.setEmail("alice.johnson@example.com");
+        booking1.setPhone("+45 12345678");
+        booking1.setActivity(a1);
+        booking1.setNumberOfGuests(4);
+        booking1.setBookingDate(LocalDate.of(2025, 3, 15));
+        booking1.setBookingTime(LocalTime.of(11, 0));
+
+        bookingRepository.save(booking1);
+
+        Booking booking2 = new Booking();
+        booking2.setFirstName("Bob");
+        booking2.setLastName("Anderson");
+        booking2.setEmail("bob.anderson@example.com");
+        booking2.setPhone("+45 87654321");
+        booking2.setActivity(a2);
+        booking2.setNumberOfGuests(6);
+        booking2.setBookingDate(LocalDate.of(2025, 3, 20));
+        booking2.setBookingTime(LocalTime.of(14, 30));
+
+        bookingRepository.save(booking2);
+
+        Booking booking3 = new Booking();
+        booking3.setFirstName("Charlie");
+        booking3.setLastName("Brown");
+        booking3.setEmail("charlie.brown@example.com");
+        booking3.setPhone("+45 11223344");
+        booking3.setActivity(a3);
+        booking3.setNumberOfGuests(3);
+        booking3.setBookingDate(LocalDate.of(2025, 3, 25));
+        booking3.setBookingTime(LocalTime.of(10, 45));
+
+        bookingRepository.save(booking3);
+
+
+        Booking booking4 = new Booking();
+        booking4.setFirstName("David");
+        booking4.setLastName("Smith");
+        booking4.setEmail("david.smith@example.com");
+        booking4.setPhone("+45 55667788");
+        booking4.setActivity(a4);
+        booking4.setNumberOfGuests(2);
+        booking4.setBookingDate(LocalDate.of(2025, 3, 28));
+        booking4.setBookingTime(LocalTime.of(16, 15));
+
+        bookingRepository.save(booking4);
+
+
+
+    }
 }
+
