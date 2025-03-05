@@ -30,8 +30,6 @@ public class BookingRestController {
     }
 
 
-
-
     // show the list of all bookings
     @GetMapping("/all")
     public List<Booking> bookings() {
@@ -42,6 +40,7 @@ public class BookingRestController {
     @PostMapping("/booking")
     @ResponseStatus(HttpStatus.CREATED)
     public Booking booking(@RequestBody Booking booking) {
+
         return bookingRepository.save(booking);
     }
 
