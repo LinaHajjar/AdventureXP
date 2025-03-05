@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("activities")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // for at sikre at frontend kan tilgå backend
 public class ActivityRestController {
 
     @Autowired
