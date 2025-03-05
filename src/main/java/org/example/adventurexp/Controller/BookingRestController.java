@@ -68,4 +68,16 @@ public class BookingRestController {
         }
     }
 
+    @GetMapping("/booking/{bookingId}")
+    public ResponseEntity<Booking> getBooking(@PathVariable int bookingId) {
+        Optional<Booking> existingBooking = bookingRepository.findById(bookingId);
+        if(existingBooking.isPresent()) {
+            return ResponseEntity.ok(existingBooking.get());
+        }
+        else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
 }
