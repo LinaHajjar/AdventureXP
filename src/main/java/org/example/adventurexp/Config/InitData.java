@@ -71,54 +71,156 @@ public class InitData implements CommandLineRunner {
         employeeRepository.save(employee2);
 
 
-        Booking booking1 = new Booking();
-        booking1.setFirstName("Alice");
-        booking1.setLastName("Johnson");
-        booking1.setEmail("alice.johnson@example.com");
-        booking1.setPhone("+45 12345678");
-        booking1.setActivity(a1);
-        booking1.setNumberOfGuests(4);
-        booking1.setBookingDate(LocalDate.of(2025, 3, 15));
-        booking1.setBookingTime(LocalTime.of(11, 0));
+        // Bookings for Activity 1
+        Booking booking1a = new Booking();
+        booking1a.setFirstName("Eve");
+        booking1a.setLastName("Williams");
+        booking1a.setEmail("eve.williams@example.com");
+        booking1a.setPhone("+45 99887766");
+        booking1a.setActivity(a1);
+        booking1a.setNumberOfGuests(5);
+        booking1a.setBookingDate(LocalDate.of(2025, 3, 16));
+        booking1a.setBookingTime(LocalTime.of(10, 30));
 
-        bookingRepository.save(booking1);
+        bookingRepository.save(booking1a);
 
-        Booking booking2 = new Booking();
-        booking2.setFirstName("Bob");
-        booking2.setLastName("Anderson");
-        booking2.setEmail("bob.anderson@example.com");
-        booking2.setPhone("+45 87654321");
-        booking2.setActivity(a2);
-        booking2.setNumberOfGuests(6);
-        booking2.setBookingDate(LocalDate.of(2025, 3, 20));
-        booking2.setBookingTime(LocalTime.of(14, 30));
+        Booking booking1b = new Booking();
+        booking1b.setFirstName("Frank");
+        booking1b.setLastName("Miller");
+        booking1b.setEmail("frank.miller@example.com");
+        booking1b.setPhone("+45 22334455");
+        booking1b.setActivity(a1);
+        booking1b.setNumberOfGuests(2);
+        booking1b.setBookingDate(LocalDate.of(2025, 3, 12));
+        booking1b.setBookingTime(LocalTime.of(12, 45));
 
-        bookingRepository.save(booking2);
+        bookingRepository.save(booking1b);
 
-        Booking booking3 = new Booking();
-        booking3.setFirstName("Charlie");
-        booking3.setLastName("Brown");
-        booking3.setEmail("charlie.brown@example.com");
-        booking3.setPhone("+45 11223344");
-        booking3.setActivity(a3);
-        booking3.setNumberOfGuests(3);
-        booking3.setBookingDate(LocalDate.of(2025, 3, 25));
-        booking3.setBookingTime(LocalTime.of(10, 45));
+        Booking booking1c = new Booking();
+        booking1c.setFirstName("Grace");
+        booking1c.setLastName("Harrison");
+        booking1c.setEmail("grace.harrison@example.com");
+        booking1c.setPhone("+45 66778899");
+        booking1c.setActivity(a1);
+        booking1c.setNumberOfGuests(4);
+        booking1c.setBookingDate(LocalDate.of(2025, 3, 22));
+        booking1c.setBookingTime(LocalTime.of(15, 15));
 
-        bookingRepository.save(booking3);
+        bookingRepository.save(booking1c);
 
 
-        Booking booking4 = new Booking();
-        booking4.setFirstName("David");
-        booking4.setLastName("Smith");
-        booking4.setEmail("david.smith@example.com");
-        booking4.setPhone("+45 55667788");
-        booking4.setActivity(a4);
-        booking4.setNumberOfGuests(2);
-        booking4.setBookingDate(LocalDate.of(2025, 3, 28));
-        booking4.setBookingTime(LocalTime.of(16, 15));
+// Bookings for Activity 2
+        Booking booking2a = new Booking();
+        booking2a.setFirstName("Henry");
+        booking2a.setLastName("Clark");
+        booking2a.setEmail("henry.clark@example.com");
+        booking2a.setPhone("+45 33221144");
+        booking2a.setActivity(a2);
+        booking2a.setNumberOfGuests(3);
+        booking2a.setBookingDate(LocalDate.of(2025, 3, 21));
+        booking2a.setBookingTime(LocalTime.of(10, 45));
 
-        bookingRepository.save(booking4);
+        bookingRepository.save(booking2a);
+
+        Booking booking2b = new Booking();
+        booking2b.setFirstName("Isabel");
+        booking2b.setLastName("Martinez");
+        booking2b.setEmail("isabel.martinez@example.com");
+        booking2b.setPhone("+45 77889900");
+        booking2b.setActivity(a2);
+        booking2b.setNumberOfGuests(7);
+        booking2b.setBookingDate(LocalDate.of(2025, 3, 23));
+        booking2b.setBookingTime(LocalTime.of(13, 30));
+
+        bookingRepository.save(booking2b);
+
+        Booking booking2c = new Booking();
+        booking2c.setFirstName("Jack");
+        booking2c.setLastName("Taylor");
+        booking2c.setEmail("jack.taylor@example.com");
+        booking2c.setPhone("+45 88990011");
+        booking2c.setActivity(a2);
+        booking2c.setNumberOfGuests(5);
+        booking2c.setBookingDate(LocalDate.of(2025, 3, 23));
+        booking2c.setBookingTime(LocalTime.of(15, 00));
+
+        bookingRepository.save(booking2c);
+
+
+// Bookings for Activity 3
+        Booking booking3a = new Booking();
+        booking3a.setFirstName("Kelly");
+        booking3a.setLastName("Davis");
+        booking3a.setEmail("kelly.davis@example.com");
+        booking3a.setPhone("+45 55668899");
+        booking3a.setActivity(a3);
+        booking3a.setNumberOfGuests(4);
+        booking3a.setBookingDate(LocalDate.of(2025, 3, 23));
+        booking3a.setBookingTime(LocalTime.of(11, 15));
+
+        bookingRepository.save(booking3a);
+
+        Booking booking3b = new Booking();
+        booking3b.setFirstName("Liam");
+        booking3b.setLastName("Walker");
+        booking3b.setEmail("liam.walker@example.com");
+        booking3b.setPhone("+45 99001122");
+        booking3b.setActivity(a3);
+        booking3b.setNumberOfGuests(6);
+        booking3b.setBookingDate(LocalDate.of(2025, 3, 29));
+        booking3b.setBookingTime(LocalTime.of(14, 45));
+
+        bookingRepository.save(booking3b);
+
+        Booking booking3c = new Booking();
+        booking3c.setFirstName("Mia");
+        booking3c.setLastName("Scott");
+        booking3c.setEmail("mia.scott@example.com");
+        booking3c.setPhone("+45 22113344");
+        booking3c.setActivity(a3);
+        booking3c.setNumberOfGuests(3);
+        booking3c.setBookingDate(LocalDate.of(2025, 3, 30));
+        booking3c.setBookingTime(LocalTime.of(16, 00));
+
+        bookingRepository.save(booking3c);
+
+
+// Bookings for Activity 4
+        Booking booking4a = new Booking();
+        booking4a.setFirstName("Nathan");
+        booking4a.setLastName("White");
+        booking4a.setEmail("nathan.white@example.com");
+        booking4a.setPhone("+45 33445566");
+        booking4a.setActivity(a4);
+        booking4a.setNumberOfGuests(2);
+        booking4a.setBookingDate(LocalDate.of(2025, 3, 31));
+        booking4a.setBookingTime(LocalTime.of(10, 30));
+
+        bookingRepository.save(booking4a);
+
+        Booking booking4b = new Booking();
+        booking4b.setFirstName("Olivia");
+        booking4b.setLastName("Lopez");
+        booking4b.setEmail("olivia.lopez@example.com");
+        booking4b.setPhone("+45 77889955");
+        booking4b.setActivity(a4);
+        booking4b.setNumberOfGuests(5);
+        booking4b.setBookingDate(LocalDate.of(2025, 4, 2));
+        booking4b.setBookingTime(LocalTime.of(12, 00));
+
+        bookingRepository.save(booking4b);
+
+        Booking booking4c = new Booking();
+        booking4c.setFirstName("Peter");
+        booking4c.setLastName("Adams");
+        booking4c.setEmail("peter.adams@example.com");
+        booking4c.setPhone("+45 66770088");
+        booking4c.setActivity(a4);
+        booking4c.setNumberOfGuests(4);
+        booking4c.setBookingDate(LocalDate.of(2025, 4, 5));
+        booking4c.setBookingTime(LocalTime.of(14, 15));
+
+        bookingRepository.save(booking4c);
 
 
 

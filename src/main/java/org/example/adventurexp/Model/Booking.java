@@ -24,7 +24,7 @@ public class Booking {
     private String email;
     private String phone;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "activity_name", referencedColumnName = "name")
     private Activity activity;
 

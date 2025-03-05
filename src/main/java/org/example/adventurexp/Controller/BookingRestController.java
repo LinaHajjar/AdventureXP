@@ -3,10 +3,12 @@ package org.example.adventurexp.Controller;
 import org.example.adventurexp.Model.Booking;
 import org.example.adventurexp.Repo.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +22,15 @@ public class BookingRestController {
 
     @Autowired
     BookingRepository bookingRepository;
+
+
+    @GetMapping("/by-date")
+    public List<Booking> getBookingsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return bookingRepository.findByBookingDate(date);
+    }
+
+
+
 
     // show the list of all bookings
     @GetMapping("/all")
