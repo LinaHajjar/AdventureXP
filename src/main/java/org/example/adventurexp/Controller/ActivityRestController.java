@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("activities")
+@RequestMapping("activities") // Base path for all endpoints in this controller
 @CrossOrigin(origins = "*") // for at sikre at frontend kan tilgå backend
 public class ActivityRestController {
 
