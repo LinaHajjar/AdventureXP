@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("activities")
-@CrossOrigin(origins = "*")
+@RequestMapping("activities") // Base path for all endpoints in this controller
+@CrossOrigin(origins = "*") // for at sikre at frontend kan tilgå backend
 public class ActivityRestController {
 
     @Autowired
@@ -53,5 +53,11 @@ public class ActivityRestController {
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("activity not found");
         }
+    }
+
+    // search after an activity with a given ID (to Edit)
+    @GetMapping("/{name}")
+    public Optional<Activity> getActivityById(@PathVariable String name) {
+        return activityRepository.findById(name);
     }
 }

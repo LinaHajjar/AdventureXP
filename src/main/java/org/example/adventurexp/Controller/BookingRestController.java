@@ -41,6 +41,7 @@ public class BookingRestController {
     @PostMapping("/booking")
     @ResponseStatus(HttpStatus.CREATED)
     public Booking booking(@RequestBody Booking booking) {
+
         return bookingRepository.save(booking);
     }
 
