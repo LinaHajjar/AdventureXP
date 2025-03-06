@@ -54,4 +54,10 @@ public class ActivityRestController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("activity not found");
         }
     }
+
+    // search after an activity with a given ID (to Edit)
+    @GetMapping("/{name}")
+    public Optional<Activity> getActivityById(@PathVariable String name) {
+        return activityRepository.findById(name);
+    }
 }
