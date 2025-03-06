@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,8 +29,6 @@ public class BookingRestController {
     public List<Booking> getBookingsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return bookingRepository.findByBookingDate(date);
     }
-
-
 
 
     // show the list of all bookings
@@ -72,10 +71,49 @@ public class BookingRestController {
     @GetMapping("/booking/{bookingId}")
     public ResponseEntity<Booking> getBooking(@PathVariable int bookingId) {
         Optional<Booking> existingBooking = bookingRepository.findById(bookingId);
-        if(existingBooking.isPresent()) {
+        if (existingBooking.isPresent()) {
             return ResponseEntity.ok(existingBooking.get());
+        } else {
+            return ResponseEntity.notFound().build();
         }
-        else {
+
+    }
+
+
+
+
+
+    @GetMapping("/editBooking/{bookingId}")
+    public ResponseEntity<Booking> getBookingById(@PathVariable int bookingId) {
+        Optional<Booking> existingBooking = bookingRepository.findById(bookingId);
+        return existingBooking.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
+
+    @PutMapping("/editBooking/{bookingId}")
+    public ResponseEntity<Booking> updateBooking(@PathVariable int bookingId, @RequestBody Booking updatedBooking) {
+        Optional<Booking> existingBooking = bookingRepository.findById(bookingId);
+
+        if (existingBooking.isPresent()) {
+            Booking bookingToUpdate = existingBooking.get();
+
+            // Update all fields from the updatedBooking (from the form submission)
+            bookingToUpdate.setFirstName(updatedBooking.getFirstName());
+            bookingToUpdate.setLastName(updatedBooking.getLastName());
+            bookingToUpdate.setEmail(updatedBooking.getEmail());
+            bookingToUpdate.setPhone(updatedBooking.getPhone());
+            bookingToUpdate.setActivity(updatedBooking.getActivity());
+            bookingToUpdate.setNumberOfGuests(updatedBooking.getNumberOfGuests());
+            bookingToUpdate.setBookingDate(updatedBooking.getBookingDate());
+            bookingToUpdate.setBookingTime(updatedBooking.getBookingTime());
+
+            // Save the updated booking
+            bookingRepository.save(bookingToUpdate);
+
+            return ResponseEntity.ok(bookingToUpdate);
+        } else {
             return ResponseEntity.notFound().build();
         }
 
