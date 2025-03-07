@@ -25,6 +25,10 @@ public class Booking {
     private String phone;
 
     @ManyToOne
+    @JoinColumn(name = "candy", referencedColumnName = "name")
+    Candy candy;
+
+    @ManyToOne
     @JoinColumn(name = "activity_name", referencedColumnName = "name")
     private Activity activity;
 

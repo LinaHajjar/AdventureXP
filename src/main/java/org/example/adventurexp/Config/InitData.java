@@ -2,9 +2,11 @@ package org.example.adventurexp.Config;
 
 import org.example.adventurexp.Model.Activity;
 import org.example.adventurexp.Model.Booking;
+import org.example.adventurexp.Model.Candy;
 import org.example.adventurexp.Model.Employee;
 import org.example.adventurexp.Repo.ActivityRepository;
 import org.example.adventurexp.Repo.BookingRepository;
+import org.example.adventurexp.Repo.CandyRepository;
 import org.example.adventurexp.Repo.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +27,10 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+
+    @Autowired
+    CandyRepository candyRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -69,6 +75,28 @@ public class InitData implements CommandLineRunner {
 
         employeeRepository.save(employee1);
         employeeRepository.save(employee2);
+
+
+        Candy candy1 = new Candy();
+        Candy candy2 = new Candy();
+        Candy candy3 = new Candy();
+
+
+
+        candy1.setName("Candyflush");
+        candy1.setPrice(14.99);
+
+        candy2.setName("Dubai");
+        candy2.setPrice(59.99);
+
+        candy3.setName("Popcorn");
+        candy3.setPrice(29.99);
+
+
+        candyRepository.save(candy1);
+        candyRepository.save(candy2);
+        candyRepository.save(candy3);
+
 
 
         // Bookings for Activity 1
@@ -221,6 +249,7 @@ public class InitData implements CommandLineRunner {
         booking4c.setBookingTime(LocalTime.of(14, 15));
 
         bookingRepository.save(booking4c);
+
 
 
 
