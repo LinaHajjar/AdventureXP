@@ -34,6 +34,15 @@ public class Booking {
 
     private int numberOfGuests;
     private LocalDate bookingDate;
+
+    public Candy getCandy() {
+        return candy;
+    }
+
+    public void setCandy(Candy candy) {
+        this.candy = candy;
+    }
+
     private LocalTime bookingTime;
 
 
