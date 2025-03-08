@@ -258,7 +258,7 @@ public class InitData implements CommandLineRunner {
         Instructor instructor1 = new Instructor();
         instructor1.setFirst_name("Victor");
         instructor1.setLast_name("Scott");
-        instructor1.setInstructor_address("Victor123@hotmail.com");
+        instructor1.setInstructor_email("Victor123@hotmail.com");
         instructor1.setInstructor_phone("+45 66770088");
         instructor1.setInstructor_address("Mårkærvej 15");
 
