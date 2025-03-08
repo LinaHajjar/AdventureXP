@@ -12,11 +12,9 @@ public class Shift {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     @ManyToOne
     @JoinColumn(name = "name")
     private Activity activity;
-
 
     private LocalDate date;
 

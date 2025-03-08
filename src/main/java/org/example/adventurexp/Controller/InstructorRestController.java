@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,10 +34,11 @@ public class InstructorRestController {
     public List<Shift> getShiftsByInstructor(@PathVariable int instructor_id) {
         Optional<Instructor> instructor = instructorRepository.findById(instructor_id);
         if (instructor.isPresent()) {
-            return shiftRepository.findByInstructor(instructor.get());
+            Instructor instructor1 = instructor.get();
+            List<Shift> shifts = shiftRepository.findByInstructor(instructor1);
+            return shifts;
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Instructor not found with ID: " + instructor_id);
-        }
+            return java.util.Collections.emptyList();        }
     }
 
 }
