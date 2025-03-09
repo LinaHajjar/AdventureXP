@@ -84,10 +84,12 @@ public class InitData implements CommandLineRunner {
         Candy candy1 = new Candy();
         Candy candy2 = new Candy();
         Candy candy3 = new Candy();
+        Candy candy4 = new Candy();
+        Candy candy5 = new Candy();
 
 
 
-        candy1.setName("Candyflush");
+        candy1.setName("Candyfloss");
         candy1.setPrice(14.99);
 
         candy2.setName("Dubai");
@@ -96,12 +98,18 @@ public class InitData implements CommandLineRunner {
         candy3.setName("Popcorn");
         candy3.setPrice(29.99);
 
+        candy4.setName("Mixed candy bag 100g");
+        candy4.setPrice(15.99);
+
+        candy5.setName("Soda");
+        candy5.setPrice(15.99);
+
 
         candyRepository.save(candy1);
         candyRepository.save(candy2);
         candyRepository.save(candy3);
-
-
+        candyRepository.save(candy4);
+        candyRepository.save(candy5);
 
         // Bookings for Activity 1
         Booking booking1a = new Booking();
@@ -113,7 +121,8 @@ public class InitData implements CommandLineRunner {
         booking1a.setNumberOfGuests(5);
         booking1a.setBookingDate(LocalDate.of(2025, 3, 16));
         booking1a.setBookingTime(LocalTime.of(10, 30));
-
+        // Sæt candy for denne booking
+        booking1a.setCandy(candy1);
         bookingRepository.save(booking1a);
 
         Booking booking1b = new Booking();
@@ -125,6 +134,7 @@ public class InitData implements CommandLineRunner {
         booking1b.setNumberOfGuests(2);
         booking1b.setBookingDate(LocalDate.of(2025, 3, 12));
         booking1b.setBookingTime(LocalTime.of(12, 45));
+        booking1b.setCandy(candy2); // Sæt candy for denne booking
 
         bookingRepository.save(booking1b);
 
@@ -137,6 +147,7 @@ public class InitData implements CommandLineRunner {
         booking1c.setNumberOfGuests(4);
         booking1c.setBookingDate(LocalDate.of(2025, 3, 22));
         booking1c.setBookingTime(LocalTime.of(15, 15));
+        booking1c.setCandy(candy3);
 
         bookingRepository.save(booking1c);
 
@@ -151,6 +162,7 @@ public class InitData implements CommandLineRunner {
         booking2a.setNumberOfGuests(3);
         booking2a.setBookingDate(LocalDate.of(2025, 3, 21));
         booking2a.setBookingTime(LocalTime.of(10, 45));
+        booking2a.setCandy(candy4);
 
         bookingRepository.save(booking2a);
 
@@ -163,6 +175,7 @@ public class InitData implements CommandLineRunner {
         booking2b.setNumberOfGuests(7);
         booking2b.setBookingDate(LocalDate.of(2025, 3, 23));
         booking2b.setBookingTime(LocalTime.of(13, 30));
+        booking2b.setCandy(candy5);
 
         bookingRepository.save(booking2b);
 

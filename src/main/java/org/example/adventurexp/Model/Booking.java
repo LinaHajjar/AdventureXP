@@ -32,6 +32,7 @@ public class Booking {
     @JoinColumn(name = "activity_name", referencedColumnName = "name")
     private Activity activity;
 
+
     private int numberOfGuests;
     private LocalDate bookingDate;
 

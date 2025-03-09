@@ -1,7 +1,11 @@
 package org.example.adventurexp.Controller;
 
+import org.example.adventurexp.Model.Activity;
 import org.example.adventurexp.Model.Booking;
+import org.example.adventurexp.Model.Candy;
+import org.example.adventurexp.Repo.ActivityRepository;
 import org.example.adventurexp.Repo.BookingRepository;
+import org.example.adventurexp.Repo.CandyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -24,12 +28,16 @@ public class BookingRestController {
     @Autowired
     BookingRepository bookingRepository;
 
+    @Autowired
+    CandyRepository candyRepository;
+
+    @Autowired
+    private ActivityRepository activityRepository;
 
     @GetMapping("/by-date")
     public List<Booking> getBookingsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return bookingRepository.findByBookingDate(date);
     }
-
 
     // show the list of all bookings
     @GetMapping("/all")
@@ -37,10 +45,23 @@ public class BookingRestController {
         return bookingRepository.findAll();
     }
 
-    //Create a new booking : sending post request
     @PostMapping("/booking")
     @ResponseStatus(HttpStatus.CREATED)
     public Booking booking(@RequestBody Booking booking) {
+        // Håndter Candy-feltet som før
+        if (booking.getCandy() != null && booking.getCandy().getName() != null && !booking.getCandy().getName().isEmpty()) {
+            Optional<Candy> candyOptional = candyRepository.findByName(booking.getCandy().getName());
+            booking.setCandy(candyOptional.orElse(null));
+        } else {
+            booking.setCandy(null);
+        }
+        // Håndter Activity-feltet: hent Activity-objektet ud fra navnet
+        if (booking.getActivity() != null && booking.getActivity().getName() != null && !booking.getActivity().getName().isEmpty()) {
+            Optional<Activity> activityOptional = activityRepository.findById(booking.getActivity().getName());
+            booking.setActivity(activityOptional.orElse(null));
+        } else {
+            booking.setActivity(null);
+        }
 
         return bookingRepository.save(booking);
     }
@@ -56,7 +77,6 @@ public class BookingRestController {
             return ResponseEntity.notFound().build(); // 404 : not found
         }
     }
-
 
     @DeleteMapping("/booking/{bookingId}")
     public ResponseEntity<String> deleteBooking(@PathVariable int bookingId) {
@@ -79,9 +99,6 @@ public class BookingRestController {
         }
 
     }
-
-
-
 
 
     @GetMapping("/editBooking/{bookingId}")

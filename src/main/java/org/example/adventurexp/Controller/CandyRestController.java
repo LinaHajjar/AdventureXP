@@ -15,10 +15,8 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class CandyRestController {
 
-
     @Autowired
     CandyRepository candyRepository;
-
 
 
     @GetMapping("/all")
