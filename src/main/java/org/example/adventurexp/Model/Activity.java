@@ -1,5 +1,7 @@
 package org.example.adventurexp.Model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -15,6 +17,18 @@ public class Activity {
     private String description;
     private double price;
     private double duration; //hvor mange minutter varer aktivitet
+
+
+
+
+    @JsonCreator
+    public Activity(@JsonProperty("name") String name) {
+        this.name = name;
+    }
+
+    public Activity() {
+
+    }
 
     public String getName() {
         return name;

@@ -104,8 +104,9 @@ public class InitData implements CommandLineRunner {
         booking1a.setFirstName("Eve");
         booking1a.setLastName("Williams");
         booking1a.setEmail("eve.williams@example.com");
-        booking1a.setPhone("+45 99887766");
+        booking1a.setPhone("4599887766");
         booking1a.setActivity(a1);
+        booking1a.setCandy(candy1);
         booking1a.setNumberOfGuests(5);
         booking1a.setBookingDate(LocalDate.of(2025, 3, 16));
         booking1a.setBookingTime(LocalTime.of(10, 30));
@@ -116,7 +117,7 @@ public class InitData implements CommandLineRunner {
         booking1b.setFirstName("Frank");
         booking1b.setLastName("Miller");
         booking1b.setEmail("frank.miller@example.com");
-        booking1b.setPhone("+45 22334455");
+        booking1b.setPhone("45 22334455");
         booking1b.setActivity(a1);
         booking1b.setNumberOfGuests(2);
         booking1b.setBookingDate(LocalDate.of(2025, 3, 12));

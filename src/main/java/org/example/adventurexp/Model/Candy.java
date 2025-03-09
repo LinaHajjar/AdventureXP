@@ -18,6 +18,10 @@ public class Candy {
         return name;
     }
 
+    public int getCandyId() {
+        return candy_id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

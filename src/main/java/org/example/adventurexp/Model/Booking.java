@@ -25,7 +25,7 @@ public class Booking {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name = "candy", referencedColumnName = "name")
+    @JoinColumn(name = "candy", referencedColumnName = "name", nullable = true)
     Candy candy;
 
     @ManyToOne
