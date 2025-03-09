@@ -1,19 +1,15 @@
 package org.example.adventurexp.Config;
 
-import org.example.adventurexp.Model.Activity;
-import org.example.adventurexp.Model.Booking;
-import org.example.adventurexp.Model.Candy;
-import org.example.adventurexp.Model.Employee;
-import org.example.adventurexp.Repo.ActivityRepository;
-import org.example.adventurexp.Repo.BookingRepository;
-import org.example.adventurexp.Repo.CandyRepository;
-import org.example.adventurexp.Repo.EmployeeRepository;
+import org.example.adventurexp.Model.*;
+import org.example.adventurexp.Repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -31,6 +27,14 @@ public class InitData implements CommandLineRunner {
 
     @Autowired
     CandyRepository candyRepository;
+
+
+    @Autowired
+    InstructorRepository instructorRepository;
+
+
+    @Autowired
+    ShiftRepository shiftRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -80,10 +84,12 @@ public class InitData implements CommandLineRunner {
         Candy candy1 = new Candy();
         Candy candy2 = new Candy();
         Candy candy3 = new Candy();
+        Candy candy4 = new Candy();
+        Candy candy5 = new Candy();
 
 
 
-        candy1.setName("Candyflush");
+        candy1.setName("Candyfloss");
         candy1.setPrice(14.99);
 
         candy2.setName("Dubai");
@@ -92,12 +98,18 @@ public class InitData implements CommandLineRunner {
         candy3.setName("Popcorn");
         candy3.setPrice(29.99);
 
+        candy4.setName("Mixed candy bag 100g");
+        candy4.setPrice(15.99);
+
+        candy5.setName("Soda");
+        candy5.setPrice(15.99);
+
 
         candyRepository.save(candy1);
         candyRepository.save(candy2);
         candyRepository.save(candy3);
-
-
+        candyRepository.save(candy4);
+        candyRepository.save(candy5);
 
         // Bookings for Activity 1
         Booking booking1a = new Booking();
@@ -110,7 +122,8 @@ public class InitData implements CommandLineRunner {
         booking1a.setNumberOfGuests(5);
         booking1a.setBookingDate(LocalDate.of(2025, 3, 16));
         booking1a.setBookingTime(LocalTime.of(10, 30));
-
+        // Sæt candy for denne booking
+        booking1a.setCandy(candy1);
         bookingRepository.save(booking1a);
 
         Booking booking1b = new Booking();
@@ -122,6 +135,7 @@ public class InitData implements CommandLineRunner {
         booking1b.setNumberOfGuests(2);
         booking1b.setBookingDate(LocalDate.of(2025, 3, 12));
         booking1b.setBookingTime(LocalTime.of(12, 45));
+        booking1b.setCandy(candy2); // Sæt candy for denne booking
 
         bookingRepository.save(booking1b);
 
@@ -134,6 +148,7 @@ public class InitData implements CommandLineRunner {
         booking1c.setNumberOfGuests(4);
         booking1c.setBookingDate(LocalDate.of(2025, 3, 22));
         booking1c.setBookingTime(LocalTime.of(15, 15));
+        booking1c.setCandy(candy3);
 
         bookingRepository.save(booking1c);
 
@@ -148,6 +163,7 @@ public class InitData implements CommandLineRunner {
         booking2a.setNumberOfGuests(3);
         booking2a.setBookingDate(LocalDate.of(2025, 3, 21));
         booking2a.setBookingTime(LocalTime.of(10, 45));
+        booking2a.setCandy(candy4);
 
         bookingRepository.save(booking2a);
 
@@ -160,6 +176,7 @@ public class InitData implements CommandLineRunner {
         booking2b.setNumberOfGuests(7);
         booking2b.setBookingDate(LocalDate.of(2025, 3, 23));
         booking2b.setBookingTime(LocalTime.of(13, 30));
+        booking2b.setCandy(candy5);
 
         bookingRepository.save(booking2b);
 
@@ -252,8 +269,92 @@ public class InitData implements CommandLineRunner {
         bookingRepository.save(booking4c);
 
 
+        Instructor instructor1 = new Instructor();
+        instructor1.setFirst_name("Victor");
+        instructor1.setLast_name("Scott");
+        instructor1.setInstructor_email("Victor123@hotmail.com");
+        instructor1.setInstructor_phone("+45 66770088");
+        instructor1.setInstructor_address("Mårkærvej 15");
 
+        Instructor instructor2 = new Instructor();
+        instructor2.setFirst_name("Emma");
+        instructor2.setLast_name("Johnson");
+        instructor2.setInstructor_email("emma.johnson@example.com");
+        instructor2.setInstructor_phone("+45 55889900");
+        instructor2.setInstructor_address("Roskildevej 42");
+
+        Instructor instructor3 = new Instructor();
+        instructor3.setFirst_name("Lucas");
+        instructor3.setLast_name("Andersen");
+        instructor3.setInstructor_email("lucas.andersen@example.com");
+        instructor3.setInstructor_phone("+45 44776655");
+        instructor3.setInstructor_address("Hovedgaden 78");
+
+        Instructor instructor4 = new Instructor();
+        instructor4.setFirst_name("Sofia");
+        instructor4.setLast_name("Nielsen");
+        instructor4.setInstructor_email("sofia.nielsen@example.com");
+        instructor4.setInstructor_phone("+45 33445566");
+        instructor4.setInstructor_address("Sønder Allé 21");
+
+        Instructor instructor5 = new Instructor();
+        instructor5.setFirst_name("Noah");
+        instructor5.setLast_name("Christensen");
+        instructor5.setInstructor_email("noah.christensen@example.com");
+        instructor5.setInstructor_phone("+45 22998877");
+        instructor5.setInstructor_address("Lyngbyvej 55");
+
+        Instructor instructor6 = new Instructor();
+        instructor6.setFirst_name("Isabella");
+        instructor6.setLast_name("Larsen");
+        instructor6.setInstructor_email("isabella.larsen@example.com");
+        instructor6.setInstructor_phone("+45 66778899");
+        instructor6.setInstructor_address("Østerbrogade 33");
+
+
+        instructorRepository.save(instructor1);
+        instructorRepository.save(instructor2);
+        instructorRepository.save(instructor3);
+        instructorRepository.save(instructor4);
+        instructorRepository.save(instructor5);
+        instructorRepository.save(instructor6);
+
+
+        generateWeeklyShifts();
 
     }
+
+
+    public void generateWeeklyShifts() {
+        List<Instructor> instructors = instructorRepository.findAll();
+        List<Activity> activities = activityRepository.findAll();
+
+
+        int instructorIndex = 0; // Track which instructor is next
+
+        // Set start date to upcoming Monday
+        LocalDate startDate = LocalDate.now().with(DayOfWeek.MONDAY);
+
+        for (int i = 0; i < 5; i++){
+            LocalDate shiftDate = startDate.plusDays(i);
+
+            for (Activity activity : activities){
+                Instructor assignedInstructor = instructors.get(instructorIndex);
+
+                Shift shift = new Shift();
+                shift.setDate(shiftDate);
+                shift.setActivity(activity);
+                shift.setInstructor(assignedInstructor);
+
+                shiftRepository.save(shift);
+
+                // Rotate instructor assignment
+                instructorIndex = (instructorIndex + 1) % instructors.size();
+            }
+
+        }
+
+    }
+
 }
 

@@ -1,8 +1,11 @@
 package org.example.adventurexp.Controller;
 
+import org.example.adventurexp.Model.Activity;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.adventurexp.Model.Booking;
 import org.example.adventurexp.Model.Candy;
+import org.example.adventurexp.Model.Candy;
+import org.example.adventurexp.Repo.ActivityRepository;
 import org.example.adventurexp.Repo.BookingRepository;
 import org.example.adventurexp.Repo.CandyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("bookings")
 @CrossOrigin(origins = "*")
+
 public class BookingRestController {
 
     @Autowired
@@ -32,6 +36,9 @@ public class BookingRestController {
     CandyRepository candyRepository;
 
 
+
+    @Autowired
+    private ActivityRepository activityRepository;
 
     @GetMapping("/by-date")
     public List<Booking> getBookingsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
@@ -49,6 +56,20 @@ public class BookingRestController {
     @PostMapping("/booking")
     @ResponseStatus(HttpStatus.CREATED)
     public Booking booking(@RequestBody Booking booking) {
+        // Håndter Candy-feltet som før
+        if (booking.getCandy() != null && booking.getCandy().getName() != null && !booking.getCandy().getName().isEmpty()) {
+            Optional<Candy> candyOptional = candyRepository.findByName(booking.getCandy().getName());
+            booking.setCandy(candyOptional.orElse(null));
+        } else {
+            booking.setCandy(null);
+        }
+        // Håndter Activity-feltet: hent Activity-objektet ud fra navnet
+        if (booking.getActivity() != null && booking.getActivity().getName() != null && !booking.getActivity().getName().isEmpty()) {
+            Optional<Activity> activityOptional = activityRepository.findById(booking.getActivity().getName());
+            booking.setActivity(activityOptional.orElse(null));
+        } else {
+            booking.setActivity(null);
+        }
 
         return bookingRepository.save(booking);
     }
@@ -65,17 +86,7 @@ public class BookingRestController {
         }
     }
 
-//
-//    @DeleteMapping("/booking/{bookingId}")
-//    public ResponseEntity<String> deleteBooking(@PathVariable int bookingId) {
-//        Optional<Booking> existingBooking = bookingRepository.findById(bookingId);
-//        if (existingBooking.isPresent()) {
-//            bookingRepository.deleteById(bookingId);
-//            return ResponseEntity.ok("Booking deleted"); //ResponseEntity.ok : status 200
-//        } else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Booking not found"); //status: 404
-//        }
-//    }
+
 
     @GetMapping("/booking/{bookingId}")
     public ResponseEntity<Booking> getBooking(@PathVariable int bookingId) {
