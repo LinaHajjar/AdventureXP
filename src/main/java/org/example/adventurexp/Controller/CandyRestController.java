@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import org.example.adventurexp.Model.Candy;
 import org.example.adventurexp.Repo.CandyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,11 @@ public class CandyRestController {
     @Autowired
     CandyRepository candyRepository;
 
+    @PostMapping("/add")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Candy addCandy(@RequestBody Candy candy) {
+        return candyRepository.save(candy);
+    }
 
     @GetMapping("/all")
     public List<Candy> allCandy(){
