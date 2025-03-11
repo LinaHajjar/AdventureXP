@@ -116,7 +116,7 @@ public class InitData implements CommandLineRunner {
         booking1a.setFirstName("Eve");
         booking1a.setLastName("Williams");
         booking1a.setEmail("eve.williams@example.com");
-        booking1a.setPhone("4599887766");
+        booking1a.setPhone("99887766");
         booking1a.setActivity(a1);
         booking1a.setCandy(candy1);
         booking1a.setNumberOfGuests(5);
@@ -130,7 +130,7 @@ public class InitData implements CommandLineRunner {
         booking1b.setFirstName("Frank");
         booking1b.setLastName("Miller");
         booking1b.setEmail("frank.miller@example.com");
-        booking1b.setPhone("45 22334455");
+        booking1b.setPhone("22334455");
         booking1b.setActivity(a1);
         booking1b.setNumberOfGuests(2);
         booking1b.setBookingDate(LocalDate.of(2025, 3, 12));
@@ -143,7 +143,7 @@ public class InitData implements CommandLineRunner {
         booking1c.setFirstName("Grace");
         booking1c.setLastName("Harrison");
         booking1c.setEmail("grace.harrison@example.com");
-        booking1c.setPhone("+45 66778899");
+        booking1c.setPhone("66778899");
         booking1c.setActivity(a1);
         booking1c.setNumberOfGuests(4);
         booking1c.setBookingDate(LocalDate.of(2025, 3, 22));
@@ -158,7 +158,7 @@ public class InitData implements CommandLineRunner {
         booking2a.setFirstName("Henry");
         booking2a.setLastName("Clark");
         booking2a.setEmail("henry.clark@example.com");
-        booking2a.setPhone("+45 33221144");
+        booking2a.setPhone("33221144");
         booking2a.setActivity(a2);
         booking2a.setNumberOfGuests(3);
         booking2a.setBookingDate(LocalDate.of(2025, 3, 21));
@@ -171,7 +171,7 @@ public class InitData implements CommandLineRunner {
         booking2b.setFirstName("Isabel");
         booking2b.setLastName("Martinez");
         booking2b.setEmail("isabel.martinez@example.com");
-        booking2b.setPhone("+45 77889900");
+        booking2b.setPhone("77889900");
         booking2b.setActivity(a2);
         booking2b.setNumberOfGuests(7);
         booking2b.setBookingDate(LocalDate.of(2025, 3, 23));
@@ -184,7 +184,7 @@ public class InitData implements CommandLineRunner {
         booking2c.setFirstName("Jack");
         booking2c.setLastName("Taylor");
         booking2c.setEmail("jack.taylor@example.com");
-        booking2c.setPhone("+45 88990011");
+        booking2c.setPhone("88990011");
         booking2c.setActivity(a2);
         booking2c.setNumberOfGuests(5);
         booking2c.setBookingDate(LocalDate.of(2025, 3, 23));
@@ -198,7 +198,7 @@ public class InitData implements CommandLineRunner {
         booking3a.setFirstName("Kelly");
         booking3a.setLastName("Davis");
         booking3a.setEmail("kelly.davis@example.com");
-        booking3a.setPhone("+45 55668899");
+        booking3a.setPhone("55668899");
         booking3a.setActivity(a3);
         booking3a.setNumberOfGuests(4);
         booking3a.setBookingDate(LocalDate.of(2025, 3, 23));
@@ -210,7 +210,7 @@ public class InitData implements CommandLineRunner {
         booking3b.setFirstName("Liam");
         booking3b.setLastName("Walker");
         booking3b.setEmail("liam.walker@example.com");
-        booking3b.setPhone("+45 99001122");
+        booking3b.setPhone("99001122");
         booking3b.setActivity(a3);
         booking3b.setNumberOfGuests(6);
         booking3b.setBookingDate(LocalDate.of(2025, 3, 29));
@@ -222,7 +222,7 @@ public class InitData implements CommandLineRunner {
         booking3c.setFirstName("Mia");
         booking3c.setLastName("Scott");
         booking3c.setEmail("mia.scott@example.com");
-        booking3c.setPhone("+45 22113344");
+        booking3c.setPhone("22113344");
         booking3c.setActivity(a3);
         booking3c.setNumberOfGuests(3);
         booking3c.setBookingDate(LocalDate.of(2025, 3, 30));
@@ -236,7 +236,7 @@ public class InitData implements CommandLineRunner {
         booking4a.setFirstName("Nathan");
         booking4a.setLastName("White");
         booking4a.setEmail("nathan.white@example.com");
-        booking4a.setPhone("+45 33445566");
+        booking4a.setPhone("33445566");
         booking4a.setActivity(a4);
         booking4a.setNumberOfGuests(2);
         booking4a.setBookingDate(LocalDate.of(2025, 3, 31));
@@ -248,7 +248,7 @@ public class InitData implements CommandLineRunner {
         booking4b.setFirstName("Olivia");
         booking4b.setLastName("Lopez");
         booking4b.setEmail("olivia.lopez@example.com");
-        booking4b.setPhone("+45 77889955");
+        booking4b.setPhone("77889955");
         booking4b.setActivity(a4);
         booking4b.setNumberOfGuests(5);
         booking4b.setBookingDate(LocalDate.of(2025, 4, 2));
@@ -260,7 +260,7 @@ public class InitData implements CommandLineRunner {
         booking4c.setFirstName("Peter");
         booking4c.setLastName("Adams");
         booking4c.setEmail("peter.adams@example.com");
-        booking4c.setPhone("+45 66770088");
+        booking4c.setPhone("66770088");
         booking4c.setActivity(a4);
         booking4c.setNumberOfGuests(4);
         booking4c.setBookingDate(LocalDate.of(2025, 4, 5));
@@ -273,42 +273,42 @@ public class InitData implements CommandLineRunner {
         instructor1.setFirst_name("Victor");
         instructor1.setLast_name("Scott");
         instructor1.setInstructor_email("Victor123@hotmail.com");
-        instructor1.setInstructor_phone("+45 66770088");
+        instructor1.setInstructor_phone("66770088");
         instructor1.setInstructor_address("Mårkærvej 15");
 
         Instructor instructor2 = new Instructor();
         instructor2.setFirst_name("Emma");
         instructor2.setLast_name("Johnson");
         instructor2.setInstructor_email("emma.johnson@example.com");
-        instructor2.setInstructor_phone("+45 55889900");
+        instructor2.setInstructor_phone("55889900");
         instructor2.setInstructor_address("Roskildevej 42");
 
         Instructor instructor3 = new Instructor();
         instructor3.setFirst_name("Lucas");
         instructor3.setLast_name("Andersen");
         instructor3.setInstructor_email("lucas.andersen@example.com");
-        instructor3.setInstructor_phone("+45 44776655");
+        instructor3.setInstructor_phone("44776655");
         instructor3.setInstructor_address("Hovedgaden 78");
 
         Instructor instructor4 = new Instructor();
         instructor4.setFirst_name("Sofia");
         instructor4.setLast_name("Nielsen");
         instructor4.setInstructor_email("sofia.nielsen@example.com");
-        instructor4.setInstructor_phone("+45 33445566");
+        instructor4.setInstructor_phone("33445566");
         instructor4.setInstructor_address("Sønder Allé 21");
 
         Instructor instructor5 = new Instructor();
         instructor5.setFirst_name("Noah");
         instructor5.setLast_name("Christensen");
         instructor5.setInstructor_email("noah.christensen@example.com");
-        instructor5.setInstructor_phone("+45 22998877");
+        instructor5.setInstructor_phone("22998877");
         instructor5.setInstructor_address("Lyngbyvej 55");
 
         Instructor instructor6 = new Instructor();
         instructor6.setFirst_name("Isabella");
         instructor6.setLast_name("Larsen");
         instructor6.setInstructor_email("isabella.larsen@example.com");
-        instructor6.setInstructor_phone("+45 66778899");
+        instructor6.setInstructor_phone("66778899");
         instructor6.setInstructor_address("Østerbrogade 33");
 
 
