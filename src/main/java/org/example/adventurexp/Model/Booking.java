@@ -24,8 +24,15 @@ public class Booking {
     private String email;
     private String phone;
 
+//    @ManyToOne
+//    @JoinColumn(name = "candy", referencedColumnName = "name", nullable = true)
+
     @ManyToOne
-    @JoinColumn(name = "candy", referencedColumnName = "name", nullable = true)
+    @JoinColumns({
+            @JoinColumn(name = "candy_id", referencedColumnName = "candy_id", nullable = true),
+            @JoinColumn(name = "candy_name", referencedColumnName = "name", nullable = true)
+    })
+
     Candy candy;
 
     @ManyToOne
@@ -118,4 +125,10 @@ public class Booking {
     public void setBookingTime(LocalTime bookingTime) {
         this.bookingTime = bookingTime;
     }
+
+
+
+
+
+
 }

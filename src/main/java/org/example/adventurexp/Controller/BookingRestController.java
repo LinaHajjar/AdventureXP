@@ -1,9 +1,7 @@
 package org.example.adventurexp.Controller;
 
 import org.example.adventurexp.Model.Activity;
-import jakarta.persistence.EntityNotFoundException;
 import org.example.adventurexp.Model.Booking;
-import org.example.adventurexp.Model.Candy;
 import org.example.adventurexp.Model.Candy;
 import org.example.adventurexp.Repo.ActivityRepository;
 import org.example.adventurexp.Repo.BookingRepository;
@@ -12,15 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 
@@ -125,69 +118,83 @@ public class BookingRestController {
         // Get the first matching booking
         Booking bookingToUpdate = bookings.get(0);
 
+        // Log the incoming updated booking for debugging
+        System.out.println("Received Updated Booking: " + updatedBooking);
+
         // Update the booking details
         bookingToUpdate.setFirstName(updatedBooking.getFirstName());
         bookingToUpdate.setLastName(updatedBooking.getLastName());
         bookingToUpdate.setEmail(updatedBooking.getEmail());
         bookingToUpdate.setPhone(updatedBooking.getPhone());
-        bookingToUpdate.setActivity(updatedBooking.getActivity());
+
+        // Handle Activity: Update or save the activity
+        if (updatedBooking.getActivity() != null) {
+            Activity updatedActivity = updatedBooking.getActivity();
+            System.out.println("Updating Activity to: " + updatedActivity.getName());
+
+            // If the Activity already exists in the database, update it
+            if (updatedActivity.getName() != null) {
+                // Fetch the existing Activity from the database using its ID
+                Activity existingActivity = activityRepository.findById(updatedActivity.getName()).orElse(null);
+
+                if (existingActivity != null) {
+                    // If activity exists, update its details
+                    existingActivity.setName(updatedActivity.getName());
+                    activityRepository.save(existingActivity);
+                    bookingToUpdate.setActivity(existingActivity); // Set updated activity
+                } else {
+                    System.out.println("Activity with ID " + updatedActivity.getName() + " not found, creating new one.");
+                    activityRepository.save(updatedActivity); // Save new activity if not found
+                    bookingToUpdate.setActivity(updatedActivity); // Set new activity
+                }
+            } else {
+                // If no ID exists (indicating a new activity), save it
+                activityRepository.save(updatedActivity);
+                bookingToUpdate.setActivity(updatedActivity); // Set the new activity
+            }
+        }
+
+        // Update other booking details
         bookingToUpdate.setNumberOfGuests(updatedBooking.getNumberOfGuests());
         bookingToUpdate.setBookingDate(updatedBooking.getBookingDate());
         bookingToUpdate.setBookingTime(updatedBooking.getBookingTime());
 
-        // Handle Candy: save or update the Candy entity
-        if (updatedBooking.getCandy() != null) {
-            Candy candy = updatedBooking.getCandy();
-            System.out.println("Received candyId: " + candy.getCandyId()); // Log the candyId for debugging
+        // Handle Candy: Fetch Candy by Name
+        if (updatedBooking.getCandy() != null && updatedBooking.getCandy().getName() != null) {
+            String candyName = updatedBooking.getCandy().getName(); // Get the name of the candy
+            System.out.println("Received candy name: " + candyName); // Log the candyName for debugging
 
-            if (candy.getCandyId() == 0) { // This indicates it's a new Candy (ID is auto-generated)
-                // If it's a new Candy, save it first
-                candyRepository.save(candy);
-                bookingToUpdate.setCandy(candy);
+            // Fetch the Candy by Name from the database
+            Optional<Candy> candy = candyRepository.findByName(candyName);
+
+            if (candy.isEmpty()) {
+                // If the Candy was not found, return a 404
+                System.out.println("Candy with name " + candyName + " not found in the database.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
             } else {
-                // If it's an existing Candy, try to find it by ID
-                Candy existingCandy = candyRepository.findById(candy.getCandyId()).orElse(null);
-
-                if (existingCandy == null) {
-                    // If the Candy was not found in the database, return a 404
-                    System.out.println("Candy with id " + candy.getCandyId() + " not found in the database.");
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-                }
-
-                // If found, update the existing Candy
-                existingCandy.setName(candy.getName());
-                existingCandy.setPrice(candy.getPrice());
-                candyRepository.save(existingCandy);
-                bookingToUpdate.setCandy(existingCandy);
+                System.out.println("Candy with name " + candyName + " found in the database.");
             }
+
+            // If found, associate the Candy with the booking
+            bookingToUpdate.setCandy(candy.orElse(null));
         }
+
 
         // Save the updated booking
         bookingRepository.save(bookingToUpdate);
+
+        // Log the updated booking
+        System.out.println("Booking updated successfully: " + bookingToUpdate);
 
         return ResponseEntity.ok(bookingToUpdate);
     }
 
 
 
-//
-//    @GetMapping("/fetchBookingDetails/{phone}")
-//    public ResponseEntity<Booking> fetchBookingDetailsforDelete(@PathVariable String phone) {
-//
-//        String decodedPhone = URLDecoder.decode(phone, StandardCharsets.UTF_8);
-//        List<Booking> bookings = bookingRepository.findByPhone(decodedPhone);
-//
-//        if (bookings.isEmpty()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        return ResponseEntity.ok(bookings.get(0)); // Send back the first matching booking
-//    }
 
 
     @GetMapping("/fetchBookingDetails/{phone}")
     public ResponseEntity<Booking> fetchBookingDetailsforDelete(@PathVariable String phone) {
-
-//        String decodedPhone = URLDecoder.decode(phone, StandardCharsets.UTF_8);
 
         // Fetch the booking details
         List<Booking> bookings = bookingRepository.findByPhone(phone);
@@ -201,28 +208,6 @@ public class BookingRestController {
     }
 
 
-
-//    @CrossOrigin(origins = "http://localhost:63342")
-//    @DeleteMapping("/deleteBooking/{phone}")
-//    public ResponseEntity<String> deleteBookingByPhone(@PathVariable String phone) {
-//        try {
-//            String decodedPhone = URLDecoder.decode(phone, StandardCharsets.UTF_8);
-//            List<Booking> bookings = bookingRepository.findByPhone(decodedPhone);
-//
-//            if (bookings.isEmpty()) {
-//                return ResponseEntity.notFound().build(); // Return 404 if no booking found
-//            }
-//
-//            Booking bookingToDelete = bookings.get(0);
-//            bookingRepository.delete(bookingToDelete);
-//
-//            return ResponseEntity.ok("Booking deleted successfully"); // Return a success message
-//        } catch (Exception e) {
-//            // Log the error if something goes wrong
-//            System.out.println("Error deleting booking: " + e.getMessage());
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting booking"); // Return 500 if there was an error
-//        }
-//    }
 
     @DeleteMapping("/deleteBooking/{phone}")
     public ResponseEntity<String> deleteBooking(@PathVariable String phone) {
